@@ -1,7 +1,7 @@
 (function (global){
 
 
-//Set up a NameSpace fou our utility
+//Set up a NameSpace for our utility
 var ajaxUtils = {};
 
 //Returns an HTTP Request Object
