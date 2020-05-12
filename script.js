@@ -60,21 +60,47 @@
 
 //Event Handling
 
-document.addEventListener("DOMContentLoaded", 
-function (event){
-    //Unobstrusive event binding
+// document.addEventListener("DOMContentLoaded", 
+// function (event){
+//     //Unobstrusive event binding
+//     document.querySelector("button").addEventListener("click", 
+//     function () {
+
+
+//         // Call Server to get the name
+//         $ajaxUtils.sendGetRequest("/data/name.txt", 
+//         function (getName){
+//             var name = getName.responseText;
+
+            
+//             document.querySelector("#content").innerHTML = "<h2>Hello  " + name + "!";
+//         });
+//     });
+// });
+
+//************* JSON LECTURE 58 **************
+
+document.addEventListener("DOMContentLoaded", function (event) {
     document.querySelector("button").addEventListener("click", 
     function () {
 
+        $ajaxUtils.sendGetRequest("/data/name.json",
+        function (res) {
+            console.log(res);
+            var message = res.firstName + " " + res.lastName + " "
+            if (res.likesChineseFood){
+                message += "likes chinese food";
+            }
+            else{
+                message += "doesn't like chinese food";
+            }
+            message += " and he uses ";
+            message += res.numberOfDisplays;
+            message += " displays for coding.";
 
-        // Call Server to get the name
-        $ajaxUtils.sendGetRequest("/data/name.txt", 
-        function (getName){
-            var name = getName.responseText;
-
-            
-            document.querySelector("#content").innerHTML = "<h2>Hello  " + name + "!";
+            document.querySelector("#content").innerHTML = "<h2>" + message + "</h2>";
         });
         
     });
+        
 });
