@@ -11,7 +11,7 @@ $(function (){
 
 (function (global){
     var dc = {};
-    var homeHtml = "/snippets/home-snippet.html";
+    var homeHtml = "snippets/home-snippet.html";
 
     // Convenience function for inserting innerHTML for 'select'
     var insertHtml = function (selector, html){
@@ -30,6 +30,9 @@ $(function (){
     document.addEventListener("DOMContentLoaded", function (event){
         // On first load, show home view
         showLoading("#main-content");
+        $ajaxUtils.sendGetRequest(homeHtml, function (resPage) {
+            document.querySelector("#main-content").innerHTML = resPage;
+        },false);
     });
 
     global.$dc = dc;
