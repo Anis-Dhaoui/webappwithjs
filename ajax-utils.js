@@ -73,7 +73,6 @@
         };
         request.open("GET", requestUrl, true); // To get the Json file (name.json)
         request.send(null); // for POST only
-        console.log(request);
     };
     global.$ajaxUtils = ajaxUtils;
 })(window);
