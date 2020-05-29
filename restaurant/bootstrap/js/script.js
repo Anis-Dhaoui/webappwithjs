@@ -39,6 +39,23 @@ $(function (){
         insertHtml(selector, html);
     };
 
+    // Remove the class 'active' from home and switch to Menu button
+    var switchMenuToActive = function () {
+      // Remove 'active' from home button
+      var classes = document.querySelector("#navHomeButton").className;
+      //console.log(classes);
+      classes = classes.replace(new RegExp("active", "g"), "");
+      //console.log(classes);
+      document.querySelector("#navHomeButton").className = classes;
+    
+      // Add 'active' to menu button if not already there
+      classes = document.querySelector("#navMenuButton").className;
+      if (classes.indexOf("active") == -1) {
+        classes += " active";
+        document.querySelector("#navMenuButton").className = classes;
+      }
+    };
+
     // On page load (before images or CSS)
     document.addEventListener("DOMContentLoaded", function (event){
         // On first load, show home view
@@ -65,6 +82,10 @@ function buildAndShowCategoriesHTML (categories) {
         $ajaxUtils.sendGetRequest(
           categoryHtml,
           function (categoryHtml) {
+
+             // Switch CSS class active to menu button
+          switchMenuToActive();
+
             var categoriesViewHtml =
               buildCategoriesViewHtml(categories, categoriesTitleHtml, categoryHtml);
               insertHtml("#main-content", categoriesViewHtml);
@@ -87,7 +108,7 @@ for (var i = 0; i < categories.length; i++) {
 var html = categoryHtml;
 //console.log(categoryHtml);
 var name = categories[i].name;
-console.log(name);
+//console.log(name);
 var short_name = categories[i].short_name;
 //console.log(short_name);
 html = insertProperty(html, "name", name);
